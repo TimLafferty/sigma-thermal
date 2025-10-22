@@ -23,7 +23,7 @@
     <div class="container">
         <header class="page-header">
             <h1>Sigma Thermal Engineering</h1>
-            <p class="subtitle">Industrial heater design and thermal engineering calculation library</p>
+            <p class="subtitle">Professional thermal engineering calculations validated against ASME standards</p>
         </header>
 
         <section class="overview-cards">
@@ -35,7 +35,7 @@
                     <h3>Key Features</h3>
                     <ul>
                         <li><strong>43 calculation functions</strong> for combustion, steam, and fluid properties</li>
-                        <li><strong>Validated accuracy</strong> - Less than 0.5% deviation from ASME standards</li>
+                        <li><strong>Highly accurate</strong> - Maximum 0.5% error vs ASME standards (99.5%+ accuracy)</li>
                         <li><strong>Multiple deployment options</strong> - Python library, Excel UDFs, web calculators, Azure</li>
                         <li><strong>Cross-platform</strong> support (Windows, macOS, Linux)</li>
                         <li><strong>Comprehensive documentation</strong> with guides and examples</li>
@@ -56,7 +56,8 @@
                     </div>
                     <div class="stat">
                         <div class="stat-number">&lt;0.5%</div>
-                        <div class="stat-label">Accuracy</div>
+                        <div class="stat-label">Max Error</div>
+                        <div style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.7;">vs ASME Standards</div>
                     </div>
                     <div class="stat">
                         <div class="stat-number">3</div>
@@ -67,12 +68,13 @@
         </section>
 
         <section class="deployment-options">
-            <h2>Deployment Options</h2>
+            <h2>Choose Your Deployment</h2>
+            <p class="subtitle">Select the option that best fits your workflow</p>
 
             <div class="option-card">
-                <h3>1. Excel UDFs</h3>
+                <h3>1. Excel UDFs <span style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">Recommended for Excel Users</span></h3>
                 <p><strong>Replace VBA macros with Python-powered User Defined Functions</strong></p>
-                <p>Best for: Existing Excel workflows, gradual VBA migration</p>
+                <p><strong>Best for:</strong> Existing Excel workflows, gradual VBA migration</p>
                 <div class="code-block">
 =HHV_MASS_GAS(85, 10, 3, 1, 0, 0, 0, 1, 0)  → 23389.33 BTU/lb
 =SATURATION_PRESSURE(212)                    → 14.648 psia
@@ -82,9 +84,9 @@
             </div>
 
             <div class="option-card">
-                <h3>2. Web Calculators (Azure)</h3>
+                <h3>2. Web Calculators <span style="background: #0066cc; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">Deployed on Azure</span></h3>
                 <p><strong>Professional HTML forms with Azure Functions backend</strong></p>
-                <p>Best for: Team collaboration, mobile access, centralized deployment</p>
+                <p><strong>Best for:</strong> Team collaboration, mobile access, centralized deployment</p>
                 <div class="code-block">
 # Deploy in 5 minutes
 ./deploy-azure.sh
@@ -96,9 +98,9 @@ https://[your-app].azurestaticapps.net
             </div>
 
             <div class="option-card">
-                <h3>3. Python Library</h3>
+                <h3>3. Python Library <span style="background: #6c757d; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">For Developers</span></h3>
                 <p><strong>Direct Python API for custom applications</strong></p>
-                <p>Best for: Automated calculations, data pipelines, integrations</p>
+                <p><strong>Best for:</strong> Automated calculations, data pipelines, custom integrations</p>
                 <div class="code-block">
 from sigma_thermal.combustion import GasComposition, hhv_mass_gas
 
