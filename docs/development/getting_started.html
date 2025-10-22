@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Thermal - Getting Started Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #334155;
+            --accent-color: #3b82f6;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --code-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-size: 16px;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .nav {
+            background-color: var(--bg-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+            padding: 0 2rem;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+        }
+
+        .section h2 {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-primary);
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section h3 {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .section h4 {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .section ul, .section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            color: #cbd5e1;
+            padding: 1.75rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9375rem;
+            line-height: 1.9;
+            border: 1px solid #334155;
+            white-space: pre;
+        }
+
+        .code-block .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        .code-block .keyword {
+            color: #c678dd;
+        }
+
+        .code-block .string {
+            color: #98c379;
+        }
+
+        .code-block .function {
+            color: #61afef;
+        }
+
+        .code-block .number {
+            color: #d19a66;
+        }
+
+        .code-block .class {
+            color: #e5c07b;
+        }
+
+        code {
+            background-color: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            color: #d73a49;
+        }
+
+        .alert {
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid;
+            background-color: var(--bg-secondary);
+        }
+
+        .alert-info {
+            border-color: var(--accent-color);
+        }
+
+        .alert-success {
+            border-color: #10b981;
+        }
+
+        .alert-warning {
+            border-color: #f59e0b;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .alert p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .card {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+
+        .card h4 {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-primary);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .card ul {
+            margin-left: 1.25rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9375rem;
+        }
+
+        table th {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 0.875rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        table tbody tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .footer {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer p {
+            margin: 0.25rem 0;
+            font-size: 0.9375rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-family: 'Manrope', sans-serif;
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>Sigma Thermal Combustion Module</h1>
+            <p>Professional Industrial Combustion Calculations in Python</p>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#overview">Overview</a>
+            <a href="#installation">Installation</a>
+            <a href="#quickstart">Quick Start</a>
+            <a href="#examples">Examples</a>
+            <a href="#advanced">Advanced Usage</a>
+            <a href="#reference">Reference</a>
+            <a href="validation_results.html">Test Results</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+
+            <p>The Sigma Thermal combustion module provides professional-grade calculations for industrial combustion systems, including boilers, furnaces, and process heaters. Based on industry-standard methods from GPSA, ASME PTC 4, and Perry's Handbook.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Heating value calculations (HHV/LHV)</li>
+                        <li>Stoichiometric air requirements</li>
+                        <li>Products of combustion analysis</li>
+                        <li>Flue gas enthalpy & stack loss</li>
+                        <li>Combustion efficiency calculations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Fuel Types Supported</h4>
+                    <ul>
+                        <li>Gas: Natural gas, methane, propane, mixed gases</li>
+                        <li>Liquid: #2 oil, gasoline, methanol, fuel oils</li>
+                        <li>Custom: User-defined gas compositions</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Applications</h4>
+                    <ul>
+                        <li>Boiler efficiency calculations</li>
+                        <li>Stack loss analysis</li>
+                        <li>Fuel switching studies</li>
+                        <li>Emissions calculations</li>
+                        <li>Process heater optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Industry Standard</strong>
+                All calculations are based on established industry standards including GPSA Engineering Data Book (13th Edition), ASME PTC 4, and Perry's Chemical Engineers' Handbook.
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="section">
+            <h2>Installation</h2>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Python 3.9 or higher</li>
+                <li>pip package manager</li>
+            </ul>
+
+            <h3>Install from Source</h3>
+            <div class="code-block">
+<span class="comment"># Clone the repository</span>
+git clone https://github.com/yourusername/sigma-thermal.git
+cd sigma-thermal
+
+<span class="comment"># Install in development mode</span>
+pip install -e .
+
+<span class="comment"># Or install normally</span>
+pip install .
+            </div>
+
+            <h3>Verify Installation</h3>
+            <div class="code-block">
+<span class="keyword">import</span> sigma_thermal
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> GasComposition, hhv_mass_gas
+
+<span class="comment"># Test basic functionality</span>
+fuel = <span class="class">GasComposition</span>(methane_mass=<span class="number">100.0</span>)
+hhv = <span class="function">hhv_mass_gas</span>(fuel)
+<span class="function">print</span>(<span class="string">f"Methane HHV: {hhv} BTU/lb"</span>)  <span class="comment"># Should print: 23875 BTU/lb</span>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Installation Complete</strong>
+                <p>If the verification code runs without errors, you're ready to start using Sigma Thermal.</p>
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section id="quickstart" class="section">
+            <h2>Quick Start</h2>
+
+            <h3>Example 1: Simple Methane Combustion</h3>
+            <p>Calculate the heating value and basic combustion properties of pure methane.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> (
+    GasComposition,
+    GasCompositionMass,
+    hhv_mass_gas,
+    lhv_mass_gas,
+    poc_co2_mass_gas
+)
+
+<span class="comment"># Define pure methane fuel</span>
+fuel_heating = <span class="class">GasComposition</span>(methane_mass=<span class="number">100.0</span>)
+fuel_poc = <span class="class">GasCompositionMass</span>(methane_mass=<span class="number">100.0</span>)
+
+<span class="comment"># Calculate heating values</span>
+hhv = <span class="function">hhv_mass_gas</span>(fuel_heating)  <span class="comment"># Higher Heating Value</span>
+lhv = <span class="function">lhv_mass_gas</span>(fuel_heating)  <span class="comment"># Lower Heating Value</span>
+
+<span class="function">print</span>(<span class="string">f"Higher Heating Value: {hhv:,.0f} BTU/lb"</span>)
+<span class="function">print</span>(<span class="string">f"Lower Heating Value: {lhv:,.0f} BTU/lb"</span>)
+
+<span class="comment"># Calculate CO2 production</span>
+fuel_flow = <span class="number">100.0</span>  <span class="comment"># lb/hr</span>
+co2_mass = <span class="function">poc_co2_mass_gas</span>(fuel_poc, fuel_flow)
+<span class="function">print</span>(<span class="string">f"CO2 produced: {co2_mass:.1f} lb/hr"</span>)
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Note</strong>
+                <p>Notice we use two different composition types: <code>GasComposition</code> for heating values and <code>GasCompositionMass</code> for products of combustion. This is by design to match the original VBA implementation.</p>
+            </div>
+
+            <h3>Example 2: Natural Gas Mixture</h3>
+            <p>Calculate properties for a typical natural gas composition.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> (
+    GasComposition,
+    hhv_mass_gas
+)
+
+<span class="comment"># Typical pipeline natural gas (mass basis)</span>
+natural_gas = <span class="class">GasComposition</span>(
+    methane_mass=<span class="number">92.0</span>,    <span class="comment"># 92% methane</span>
+    ethane_mass=<span class="number">4.0</span>,      <span class="comment"># 4% ethane</span>
+    propane_mass=<span class="number">2.5</span>,     <span class="comment"># 2.5% propane</span>
+    n2_mass=<span class="number">1.5</span>           <span class="comment"># 1.5% nitrogen</span>
+)
+
+<span class="comment"># Calculate heating value</span>
+hhv = <span class="function">hhv_mass_gas</span>(natural_gas)
+<span class="function">print</span>(<span class="string">f"Natural Gas HHV: {hhv:,.0f} BTU/lb"</span>)
+
+<span class="comment"># Calculate heat input for 500 lb/hr</span>
+fuel_flow = <span class="number">500.0</span>  <span class="comment"># lb/hr</span>
+heat_input = hhv * fuel_flow
+<span class="function">print</span>(<span class="string">f"Heat Input: {heat_input/1e6:.2f} MMBtu/hr"</span>)
+            </div>
+
+            <h3>Example 3: Liquid Fuel (#2 Oil)</h3>
+            <p>Calculate properties for #2 fuel oil.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> (
+    hhv_mass_liquid,
+    lhv_mass_liquid,
+    poc_co2_mass_liquid
+)
+
+<span class="comment"># #2 Fuel Oil properties</span>
+fuel_type = <span class="string">'#2 oil'</span>
+fuel_flow = <span class="number">300.0</span>  <span class="comment"># lb/hr</span>
+
+<span class="comment"># Heating values (from lookup tables)</span>
+hhv = <span class="function">hhv_mass_liquid</span>(fuel_type)
+lhv = <span class="function">lhv_mass_liquid</span>(fuel_type)
+
+<span class="function">print</span>(<span class="string">f"#2 Oil HHV: {hhv:,.0f} BTU/lb"</span>)
+<span class="function">print</span>(<span class="string">f"#2 Oil LHV: {lhv:,.0f} BTU/lb"</span>)
+
+<span class="comment"># CO2 emissions</span>
+co2_mass = <span class="function">poc_co2_mass_liquid</span>(fuel_type, fuel_flow)
+co2_per_mmbtu = (co2_mass / (hhv * fuel_flow)) * <span class="number">1e6</span>
+<span class="function">print</span>(<span class="string">f"CO2 emissions: {co2_per_mmbtu:.0f} lb/MMBtu"</span>)
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="section">
+            <h2>Complete Examples</h2>
+
+            <h3>Complete Boiler Efficiency Calculation</h3>
+            <p>This example shows a complete workflow for calculating combustion efficiency.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> (
+    GasComposition,
+    GasCompositionMass,
+    hhv_mass_gas,
+    poc_h2o_mass_gas,
+    poc_co2_mass_gas,
+    poc_n2_mass_gas,
+    poc_o2_mass,
+    flue_gas_enthalpy
+)
+
+<span class="comment"># ===== 1. Define Operating Conditions =====</span>
+fuel_flow = <span class="number">100.0</span>              <span class="comment"># lb/hr</span>
+excess_air_percent = <span class="number">15.0</span>     <span class="comment"># %</span>
+stack_temp = <span class="number">400.0</span>            <span class="comment"># °F</span>
+ambient_temp = <span class="number">77.0</span>           <span class="comment"># °F</span>
+humidity = <span class="number">0.013</span>              <span class="comment"># lb H2O / lb dry air</span>
+
+<span class="comment"># ===== 2. Define Fuel Composition =====</span>
+fuel_heating = <span class="class">GasComposition</span>(methane_mass=<span class="number">100.0</span>)
+fuel_poc = <span class="class">GasCompositionMass</span>(methane_mass=<span class="number">100.0</span>)
+
+<span class="comment"># ===== 3. Calculate Heating Value =====</span>
+hhv = <span class="function">hhv_mass_gas</span>(fuel_heating)
+<span class="function">print</span>(<span class="string">f"HHV: {hhv:,.0f} BTU/lb"</span>)
+
+<span class="comment"># ===== 4. Calculate Air Requirements =====</span>
+stoich_air_ratio = <span class="number">17.24</span>  <span class="comment"># lb air / lb methane</span>
+stoich_air_flow = fuel_flow * stoich_air_ratio
+actual_air_flow = stoich_air_flow * (<span class="number">1</span> + excess_air_percent / <span class="number">100</span>)
+
+<span class="function">print</span>(<span class="string">f"Stoichiometric air: {stoich_air_flow:,.0f} lb/hr"</span>)
+<span class="function">print</span>(<span class="string">f"Actual air: {actual_air_flow:,.0f} lb/hr"</span>)
+
+<span class="comment"># ===== 5. Calculate Products of Combustion =====</span>
+h2o = <span class="function">poc_h2o_mass_gas</span>(fuel_poc, fuel_flow, humidity, actual_air_flow)
+co2 = <span class="function">poc_co2_mass_gas</span>(fuel_poc, fuel_flow)
+n2 = <span class="function">poc_n2_mass_gas</span>(fuel_poc, fuel_flow, actual_air_flow, stoich_air_flow)
+o2 = <span class="function">poc_o2_mass</span>(fuel_flow, actual_air_flow, stoich_air_flow, <span class="number">0.0</span>)
+
+total_flue = h2o + co2 + n2 + o2
+
+<span class="function">print</span>(<span class="string">f"\nFlue Gas Composition:"</span>)
+<span class="function">print</span>(<span class="string">f"  H2O: {h2o:,.1f} lb/hr ({h2o/total_flue*100:.1f}%)"</span>)
+<span class="function">print</span>(<span class="string">f"  CO2: {co2:,.1f} lb/hr ({co2/total_flue*100:.1f}%)"</span>)
+<span class="function">print</span>(<span class="string">f"  N2:  {n2:,.1f} lb/hr ({n2/total_flue*100:.1f}%)"</span>)
+<span class="function">print</span>(<span class="string">f"  O2:  {o2:,.1f} lb/hr ({o2/total_flue*100:.1f}%)"</span>)
+
+<span class="comment"># ===== 6. Calculate Flue Gas Enthalpy =====</span>
+flue_enthalpy = <span class="function">flue_gas_enthalpy</span>(
+    h2o_fraction=h2o / total_flue,
+    co2_fraction=co2 / total_flue,
+    n2_fraction=n2 / total_flue,
+    o2_fraction=o2 / total_flue,
+    gas_temp=stack_temp,
+    ambient_temp=ambient_temp
+)
+
+<span class="function">print</span>(<span class="string">f"\nFlue gas enthalpy: {flue_enthalpy:.1f} BTU/lb"</span>)
+
+<span class="comment"># ===== 7. Calculate Efficiency =====</span>
+heat_input = hhv * fuel_flow
+stack_loss = flue_enthalpy * total_flue
+combustion_efficiency = (heat_input - stack_loss) / heat_input * <span class="number">100</span>
+
+<span class="function">print</span>(<span class="string">f"\n=== RESULTS ==="</span>)
+<span class="function">print</span>(<span class="string">f"Heat input: {heat_input/1e6:.2f} MMBtu/hr"</span>)
+<span class="function">print</span>(<span class="string">f"Stack loss: {stack_loss/1e6:.2f} MMBtu/hr ({stack_loss/heat_input*100:.1f}%)"</span>)
+<span class="function">print</span>(<span class="string">f"Combustion efficiency: {combustion_efficiency:.1f}%"</span>)
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Expected Output:</strong>
+                <pre>HHV: 23,875 BTU/lb
+Stoichiometric air: 1,724 lb/hr
+Actual air: 1,983 lb/hr
+
+Flue Gas Composition:
+  H2O: 249.3 lb/hr (12.2%)
+  CO2: 274.3 lb/hr (13.4%)
+  N2:  1,489.6 lb/hr (72.8%)
+  O2:  32.3 lb/hr (1.6%)
+
+Flue gas enthalpy: 118.2 BTU/lb
+
+=== RESULTS ===
+Heat input: 2.39 MMBtu/hr
+Stack loss: 0.24 MMBtu/hr (10.1%)
+Combustion efficiency: 89.9%</pre>
+            </div>
+
+            <h3>Fuel Comparison Example</h3>
+            <p>Compare natural gas vs #2 oil at the same heat input.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> *
+
+<span class="comment"># Target: 10 MMBtu/hr heat input</span>
+target_heat = <span class="number">10e6</span>  <span class="comment"># BTU/hr</span>
+
+<span class="comment"># === Natural Gas ===</span>
+ng_composition = <span class="class">GasComposition</span>(methane_mass=<span class="number">100.0</span>)
+ng_hhv = <span class="function">hhv_mass_gas</span>(ng_composition)
+ng_fuel_flow = target_heat / ng_hhv
+
+<span class="function">print</span>(<span class="string">"NATURAL GAS:"</span>)
+<span class="function">print</span>(<span class="string">f"  HHV: {ng_hhv:,.0f} BTU/lb"</span>)
+<span class="function">print</span>(<span class="string">f"  Fuel flow: {ng_fuel_flow:.1f} lb/hr"</span>)
+
+<span class="comment"># Calculate CO2</span>
+ng_comp_poc = <span class="class">GasCompositionMass</span>(methane_mass=<span class="number">100.0</span>)
+ng_co2 = <span class="function">poc_co2_mass_gas</span>(ng_comp_poc, ng_fuel_flow)
+ng_co2_per_mmbtu = (ng_co2 / target_heat) * <span class="number">1e6</span>
+<span class="function">print</span>(<span class="string">f"  CO2: {ng_co2_per_mmbtu:.0f} lb/MMBtu"</span>)
+
+<span class="comment"># === #2 Oil ===</span>
+oil_hhv = <span class="function">hhv_mass_liquid</span>(<span class="string">'#2 oil'</span>)
+oil_fuel_flow = target_heat / oil_hhv
+
+<span class="function">print</span>(<span class="string">"\n#2 OIL:"</span>)
+<span class="function">print</span>(<span class="string">f"  HHV: {oil_hhv:,.0f} BTU/lb"</span>)
+<span class="function">print</span>(<span class="string">f"  Fuel flow: {oil_fuel_flow:.1f} lb/hr"</span>)
+
+<span class="comment"># Calculate CO2</span>
+oil_co2 = <span class="function">poc_co2_mass_liquid</span>(<span class="string">'#2 oil'</span>, oil_fuel_flow)
+oil_co2_per_mmbtu = (oil_co2 / target_heat) * <span class="number">1e6</span>
+<span class="function">print</span>(<span class="string">f"  CO2: {oil_co2_per_mmbtu:.0f} lb/MMBtu"</span>)
+
+<span class="comment"># === Comparison ===</span>
+co2_increase = (oil_co2_per_mmbtu - ng_co2_per_mmbtu) / ng_co2_per_mmbtu * <span class="number">100</span>
+<span class="function">print</span>(<span class="string">f"\nOil produces {co2_increase:.1f}% more CO2 than natural gas"</span>)
+            </div>
+        </section>
+
+        <!-- Advanced Usage Section -->
+        <section id="advanced" class="section">
+            <h2>Advanced Usage</h2>
+
+            <h3>Custom Gas Mixtures</h3>
+            <p>Define complex gas compositions with multiple components.</p>
+
+            <div class="code-block">
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> GasComposition
+
+<span class="comment"># Complex refinery fuel gas</span>
+refinery_gas = <span class="class">GasComposition</span>(
+    methane_mass=<span class="number">45.0</span>,
+    ethane_mass=<span class="number">20.0</span>,
+    propane_mass=<span class="number">15.0</span>,
+    butane_mass=<span class="number">10.0</span>,
+    h2_mass=<span class="number">8.0</span>,
+    n2_mass=<span class="number">2.0</span>
+)
+
+hhv = <span class="function">hhv_mass_gas</span>(refinery_gas)
+<span class="function">print</span>(<span class="string">f"Refinery gas HHV: {hhv:,.0f} BTU/lb"</span>)
+            </div>
+
+            <h3>Parametric Studies</h3>
+            <p>Analyze how efficiency changes with operating conditions.</p>
+
+            <div class="code-block">
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+<span class="keyword">from</span> sigma_thermal.combustion <span class="keyword">import</span> *
+
+<span class="comment"># Study effect of stack temperature on efficiency</span>
+fuel = <span class="class">GasComposition</span>(methane_mass=<span class="number">100.0</span>)
+fuel_poc = <span class="class">GasCompositionMass</span>(methane_mass=<span class="number">100.0</span>)
+hhv = <span class="function">hhv_mass_gas</span>(fuel)
+
+stack_temps = <span class="function">range</span>(<span class="number">300</span>, <span class="number">801</span>, <span class="number">50</span>)
+efficiencies = []
+
+<span class="keyword">for</span> stack_temp <span class="keyword">in</span> stack_temps:
+    <span class="comment"># Calculate flue gas enthalpy</span>
+    h_flue = <span class="function">flue_gas_enthalpy</span>(
+        h2o_fraction=<span class="number">0.122</span>,
+        co2_fraction=<span class="number">0.134</span>,
+        n2_fraction=<span class="number">0.728</span>,
+        o2_fraction=<span class="number">0.016</span>,
+        gas_temp=stack_temp,
+        ambient_temp=<span class="number">77.0</span>
+    )
+
+    <span class="comment"># Calculate efficiency (simplified)</span>
+    total_flue = <span class="number">2045.0</span>  <span class="comment"># lb/hr</span>
+    heat_input = hhv * <span class="number">100.0</span>
+    stack_loss = h_flue * total_flue
+    efficiency = (heat_input - stack_loss) / heat_input * <span class="number">100</span>
+
+    efficiencies.append(efficiency)
+
+<span class="comment"># Plot results</span>
+plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))
+plt.plot(stack_temps, efficiencies, <span class="string">'b-'</span>, linewidth=<span class="number">2</span>)
+plt.xlabel(<span class="string">'Stack Temperature (°F)'</span>)
+plt.ylabel(<span class="string">'Combustion Efficiency (%)'</span>)
+plt.title(<span class="string">'Stack Temperature Impact on Efficiency'</span>)
+plt.grid(<span class="class">True</span>, alpha=<span class="number">0.3</span>)
+plt.show()
+            </div>
+
+            <h3>Handling Multiple Scenarios</h3>
+            <p>Create a reusable calculator class for batch calculations.</p>
+
+            <div class="code-block">
+<span class="keyword">class</span> <span class="class">BoilerCalculator</span>:
+    <span class="string">"""Reusable boiler efficiency calculator"""</span>
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, fuel_type, stoich_air_ratio):
+        <span class="keyword">self</span>.fuel_type = fuel_type
+        <span class="keyword">self</span>.stoich_air = stoich_air_ratio
+
+    <span class="keyword">def</span> <span class="function">calculate_efficiency</span>(<span class="keyword">self</span>, fuel_flow, excess_air, stack_temp):
+        <span class="comment"># Implementation from earlier example...</span>
+        <span class="keyword">pass</span>
+
+    <span class="keyword">def</span> <span class="function">run_scenarios</span>(<span class="keyword">self</span>, scenarios):
+        results = []
+        <span class="keyword">for</span> scenario <span class="keyword">in</span> scenarios:
+            eff = <span class="keyword">self</span>.<span class="function">calculate_efficiency</span>(**scenario)
+            results.append(eff)
+        <span class="keyword">return</span> results
+
+<span class="comment"># Use it</span>
+calc = <span class="class">BoilerCalculator</span>(<span class="string">'methane'</span>, <span class="number">17.24</span>)
+scenarios = [
+    {<span class="string">'fuel_flow'</span>: <span class="number">100</span>, <span class="string">'excess_air'</span>: <span class="number">10</span>, <span class="string">'stack_temp'</span>: <span class="number">300</span>},
+    {<span class="string">'fuel_flow'</span>: <span class="number">100</span>, <span class="string">'excess_air'</span>: <span class="number">15</span>, <span class="string">'stack_temp'</span>: <span class="number">400</span>},
+    {<span class="string">'fuel_flow'</span>: <span class="number">100</span>, <span class="string">'excess_air'</span>: <span class="number">20</span>, <span class="string">'stack_temp'</span>: <span class="number">500</span>},
+]
+efficiencies = calc.<span class="function">run_scenarios</span>(scenarios)
+            </div>
+        </section>
+
+        <!-- Reference Section -->
+        <section id="reference" class="section">
+            <h2>Quick Reference</h2>
+
+            <h3>Available Fuel Types</h3>
+
+            <h4>Gaseous Fuels (Mass Basis)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Parameter Name</th>
+                        <th>Example Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Methane</td><td><code>methane_mass</code></td><td>90.0</td></tr>
+                    <tr><td>Ethane</td><td><code>ethane_mass</code></td><td>5.0</td></tr>
+                    <tr><td>Propane</td><td><code>propane_mass</code></td><td>3.0</td></tr>
+                    <tr><td>Butane</td><td><code>butane_mass</code></td><td>1.0</td></tr>
+                    <tr><td>Hydrogen</td><td><code>h2_mass</code></td><td>0.5</td></tr>
+                    <tr><td>Nitrogen</td><td><code>n2_mass</code></td><td>0.5</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Liquid Fuels (Lookup Table Based)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fuel Type</th>
+                        <th>String Name</th>
+                        <th>Typical HHV (BTU/lb)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Fuel Oil #1</td><td><code>'#1 oil'</code></td><td>19,670</td></tr>
+                    <tr><td>Fuel Oil #2</td><td><code>'#2 oil'</code></td><td>18,993</td></tr>
+                    <tr><td>Fuel Oil #4</td><td><code>'#4 oil'</code></td><td>18,850</td></tr>
+                    <tr><td>Fuel Oil #5</td><td><code>'#5 oil'</code></td><td>18,500</td></tr>
+                    <tr><td>Fuel Oil #6</td><td><code>'#6 oil'</code></td><td>18,300</td></tr>
+                    <tr><td>Gasoline</td><td><code>'gasoline'</code></td><td>20,190</td></tr>
+                    <tr><td>Methanol</td><td><code>'methanol'</code></td><td>9,758</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Typical Values</h3>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>Stoichiometric Air Ratios</h4>
+                    <table>
+                        <tr><td>Methane (CH₄)</td><td>17.24 lb air/lb fuel</td></tr>
+                        <tr><td>Ethane (C₂H₆)</td><td>16.12</td></tr>
+                        <tr><td>Propane (C₃H₈)</td><td>15.69</td></tr>
+                        <tr><td>#2 Oil</td><td>14.5</td></tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h4>Typical Excess Air</h4>
+                    <table>
+                        <tr><td>Natural gas burners</td><td>10-15%</td></tr>
+                        <tr><td>Oil burners</td><td>15-25%</td></tr>
+                        <tr><td>Process heaters</td><td>10-20%</td></tr>
+                        <tr><td>Package boilers</td><td>15-25%</td></tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h4>Typical Stack Temperatures</h4>
+                    <table>
+                        <tr><td>Condensing boiler</td><td>250-350°F</td></tr>
+                        <tr><td>Efficient boiler</td><td>300-450°F</td></tr>
+                        <tr><td>Standard boiler</td><td>400-600°F</td></tr>
+                        <tr><td>Process heater</td><td>500-800°F</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Common Issues & Solutions</h3>
+
+            <div class="alert alert-warning">
+                <strong>Common Pitfall: Wrong Composition Type</strong>
+                <p>Remember to use <code>GasComposition</code> for heating values and <code>GasCompositionMass</code> for products of combustion calculations.</p>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Mass Balance Not Closing?</strong>
+                <p>Don't forget to include humidity water in your mass balance: <code>humidity × air_flow</code></p>
+            </div>
+
+            <h3>Additional Resources</h3>
+            <ul>
+                <li><strong>Source Code:</strong> <a href="https://github.com/yourusername/sigma-thermal">GitHub Repository</a></li>
+                <li><strong>Test Examples:</strong> See <code>tests/validation/</code> and <code>tests/integration/</code> for complete working examples</li>
+                <li><strong>API Documentation:</strong> Run <code>help(sigma_thermal.combustion)</code> in Python</li>
+                <li><strong>Issue Tracker:</strong> Report bugs or request features on GitHub</li>
+            </ul>
+
+            <h3>References</h3>
+            <ol>
+                <li>GPSA Engineering Data Book, 13th Edition</li>
+                <li>Perry's Chemical Engineers' Handbook, 8th Edition</li>
+                <li>ASME PTC 4 - Fired Steam Generators Performance Test Codes</li>
+                <li>EPA AP-42 - Compilation of Air Pollutant Emission Factors</li>
+            </ol>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Sigma Thermal. Professional Industrial Engineering Calculations.</p>
+        <p>Based on industry-standard methods (GPSA, ASME PTC 4, Perry's Handbook)</p>
+    </footer>
+</body>
+</html>

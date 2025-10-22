@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip:*)",
+      "Bash(python3 -m pip:*)",
+      "Read(//private/tmp/**)",
+      "Read(//tmp/**)",
+      "Bash(awk:*)",
+      "Bash(for module in CombustionFunctions EngineeringFunctions FluidFunctions PricingFunctions RadiantFunctions WaterBathFunctions ConvectionFunctions)",
+      "Bash(do echo \"=== $module ===\")",
+      "Bash(done)",
+      "Bash(find:*)",
+      "Bash(tree:*)",
+      "Bash(python3:*)",
+      "Bash(open:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(cloc:*)",
+      "Bash(chmod:*)",
+      "Bash(pip install:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(./run_calculators.sh)",
+      "Bash(cat:*)",
+      "Bash(./deploy-azure.sh)",
+      "Bash(az staticwebapp list:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Thermal Engineering - Documentation</title>
+    <link rel="stylesheet" href="css/docs.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Sigma Thermal Engineering</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="resources.html" class="nav-link">Resources</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <a href="migration-guide.html" class="nav-link">Migration Guide</a>
+                <a href="test-results.html" class="nav-link">Test Results</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Sigma Thermal Engineering</h1>
+            <p class="subtitle">Industrial heater design and thermal engineering calculation library</p>
+        </header>
+
+        <section class="overview-cards">
+            <div class="card">
+                <h2>Overview</h2>
+                <p>Sigma Thermal is a comprehensive Python library for thermal engineering calculations. It replaces legacy Excel VBA macros with modern, validated Python implementations.</p>
+
+                <div class="features">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>43 calculation functions</strong> for combustion, steam, and fluid properties</li>
+                        <li><strong>Validated accuracy</strong> - Less than 0.5% deviation from ASME standards</li>
+                        <li><strong>Multiple deployment options</strong> - Python library, Excel UDFs, web calculators, Azure</li>
+                        <li><strong>Cross-platform</strong> support (Windows, macOS, Linux)</li>
+                        <li><strong>Comprehensive documentation</strong> with guides and examples</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Quick Stats</h2>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <div class="stat-number">43</div>
+                        <div class="stat-label">Functions</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">412</div>
+                        <div class="stat-label">Unit Tests</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">&lt;0.5%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Deployment Options</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="deployment-options">
+            <h2>Deployment Options</h2>
+
+            <div class="option-card">
+                <h3>1. Excel UDFs</h3>
+                <p><strong>Replace VBA macros with Python-powered User Defined Functions</strong></p>
+                <p>Best for: Existing Excel workflows, gradual VBA migration</p>
+                <div class="code-block">
+=HHV_MASS_GAS(85, 10, 3, 1, 0, 0, 0, 1, 0)  → 23389.33 BTU/lb
+=SATURATION_PRESSURE(212)                    → 14.648 psia
+=STEAM_ENTHALPY(212, 14.7, 1.0)             → 1156.21 BTU/lb
+                </div>
+                <a href="migration-guide.html" class="btn btn-primary">View Migration Guide →</a>
+            </div>
+
+            <div class="option-card">
+                <h3>2. Web Calculators (Azure)</h3>
+                <p><strong>Professional HTML forms with Azure Functions backend</strong></p>
+                <p>Best for: Team collaboration, mobile access, centralized deployment</p>
+                <div class="code-block">
+# Deploy in 5 minutes
+./deploy-azure.sh
+
+# Access at
+https://[your-app].azurestaticapps.net
+                </div>
+                <a href="../web/index.html" class="btn btn-primary">View Web Calculators →</a>
+            </div>
+
+            <div class="option-card">
+                <h3>3. Python Library</h3>
+                <p><strong>Direct Python API for custom applications</strong></p>
+                <p>Best for: Automated calculations, data pipelines, integrations</p>
+                <div class="code-block">
+from sigma_thermal.combustion import GasComposition, hhv_mass_gas
+
+fuel = GasComposition(methane_mass=100)
+hhv = hhv_mass_gas(fuel)  # 23875.0 BTU/lb
+                </div>
+                <a href="development/getting_started.html" class="btn btn-primary">View Developer Guide →</a>
+            </div>
+        </section>
+
+        <section class="calculations">
+            <h2>Available Calculations</h2>
+
+            <div class="calc-grid">
+                <div class="calc-category">
+                    <h3>Combustion</h3>
+                    <ul>
+                        <li>Heating Values (HHV/LHV)</li>
+                        <li>Air Requirements</li>
+                        <li>Products of Combustion</li>
+                        <li>Flue Gas Enthalpy</li>
+                        <li>Combustion Efficiency</li>
+                    </ul>
+                </div>
+
+                <div class="calc-category">
+                    <h3>Steam Properties</h3>
+                    <ul>
+                        <li>Saturation Pressure</li>
+                        <li>Saturation Temperature</li>
+                        <li>Steam Enthalpy</li>
+                        <li>Steam Quality</li>
+                    </ul>
+                </div>
+
+                <div class="calc-category">
+                    <h3>Water Properties</h3>
+                    <ul>
+                        <li>Density</li>
+                        <li>Viscosity</li>
+                        <li>Specific Heat</li>
+                        <li>Thermal Conductivity</li>
+                    </ul>
+                </div>
+
+                <div class="calc-category">
+                    <h3>Flash Steam</h3>
+                    <ul>
+                        <li>Flash Calculations</li>
+                        <li>Steam Generation</li>
+                        <li>Pressure Drop Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <h2>Quick Links</h2>
+
+            <div class="links-grid">
+                <a href="resources.html" class="link-card">
+                    <h3>📚 Resources</h3>
+                    <p>Technical reference, formulas, default values, and fuel presets</p>
+                </a>
+
+                <a href="progress.html" class="link-card">
+                    <h3>📊 Progress</h3>
+                    <p>Completed features and roadmap for future development</p>
+                </a>
+
+                <a href="migration-guide.html" class="link-card">
+                    <h3>🔄 Migration Guide</h3>
+                    <p>Step-by-step guide to replace VBA macros with Python UDFs</p>
+                </a>
+
+                <a href="test-results.html" class="link-card">
+                    <h3>✅ Test Results</h3>
+                    <p>Validation results and test coverage reports</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="getting-started">
+            <h2>Getting Started</h2>
+
+            <div class="start-grid">
+                <div class="start-card">
+                    <h3>Excel Users</h3>
+                    <ol>
+                        <li>Install xlwings: <code>pip install xlwings</code></li>
+                        <li>Install add-in: <code>xlwings addin install</code></li>
+                        <li>Copy UDF files to workbook folder</li>
+                        <li>Import functions in Excel</li>
+                    </ol>
+                    <a href="migration-guide.html" class="btn">Migration Guide →</a>
+                </div>
+
+                <div class="start-card">
+                    <h3>Azure Deployment</h3>
+                    <ol>
+                        <li>Run: <code>./deploy-azure.sh</code></li>
+                        <li>Add GitHub secret</li>
+                        <li>Push to main branch</li>
+                        <li>Access deployed app</li>
+                    </ol>
+                    <a href="azure-deployment/quick-start.md" class="btn">Azure Guide →</a>
+                </div>
+
+                <div class="start-card">
+                    <h3>Python Developers</h3>
+                    <ol>
+                        <li>Clone repository</li>
+                        <li>Install: <code>pip install -e .</code></li>
+                        <li>Import modules</li>
+                        <li>Start calculating</li>
+                    </ol>
+                    <a href="development/getting_started.html" class="btn">Dev Guide →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 GTS Energy Inc. All rights reserved.</p>
+            <p>Version 1.0.0 | Python 3.11+ | Excel 2016+</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Azure Functions requirements
+azure-functions
+
+# Project dependencies (install from parent directory)
+# The sigma-thermal package will be installed from the parent directory

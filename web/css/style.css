@@ -1,0 +1,398 @@
+/* Sigma Thermal Engineering Calculators - Professional Styling */
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --text-dark: #212529;
+    --text-medium: #495057;
+    --text-light: #6c757d;
+    --border-color: #e9ecef;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --border-radius: 4px;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--bg-light);
+}
+
+/* Typography */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-medium);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.25rem;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.header {
+    background-color: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.nav {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: var(--text-medium);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    transition: all 0.2s;
+}
+
+.nav a:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.nav a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Cards */
+.card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.card-header {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-medium);
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+}
+
+/* Buttons */
+.btn {
+    padding: var(--spacing-sm) 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border-color);
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--text-medium);
+    background-color: var(--bg-light);
+}
+
+.table tr:hover {
+    background-color: var(--bg-light);
+}
+
+/* Code blocks */
+.code {
+    background-color: #f6f8fa;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    font-family: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-header {
+    font-weight: 600;
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formula {
+    background-color: #fffbf0;
+    border-left: 3px solid #ff9800;
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.value-table {
+    background-color: #f6f8fa;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--border-radius);
+    font-family: 'SF Mono', monospace;
+    font-size: 0.875rem;
+}
+
+/* Table of contents */
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.toc-list > li {
+    margin-bottom: 0.5rem;
+}
+
+.toc-list a {
+    color: var(--text-medium);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-block;
+    padding: 0.25rem 0;
+}
+
+.toc-list a:hover {
+    color: var(--primary-color);
+}
+
+.toc-sublist {
+    list-style: none;
+    padding-left: 1.25rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.toc-sublist li {
+    margin-bottom: 0.25rem;
+}
+
+.toc-sublist a {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.toc-sublist a::before {
+    content: "→ ";
+    margin-right: 0.25rem;
+    color: var(--border-color);
+}
+
+/* Section headers with anchors */
+.section-anchor {
+    scroll-margin-top: 100px;
+}
+
+/* Status indicators */
+.status {
+    padding: 0.75rem var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) 0;
+}
+
+.status-pass {
+    background-color: #e8f5e9;
+    border-left: 4px solid var(--success-color);
+}
+
+.status-warning {
+    background-color: #fff8e1;
+    border-left: 4px solid var(--warning-color);
+}
+
+.status-fail {
+    background-color: #ffebee;
+    border-left: 4px solid var(--error-color);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Utilities */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-light);
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--spacing-sm); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+.mb-3 { margin-bottom: var(--spacing-lg); }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mt-3 { margin-top: var(--spacing-lg); }
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-lg) 0;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-lg);
+}

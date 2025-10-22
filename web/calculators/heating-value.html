@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heating Value Calculator - Sigma Thermal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Sigma Thermal Engineering</h1>
+            <nav>
+                <ul class="nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../resource.html">Resources</a></li>
+                    <li><a href="heating-value.html" class="active">Calculators</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Heating Value Calculator</h1>
+        <p class="text-muted">
+            Calculate the higher heating value (HHV) and lower heating value (LHV) for gaseous fuels
+            on both mass and volume basis.
+        </p>
+
+        <hr>
+
+        <!-- Fuel Selection -->
+        <div class="card">
+            <div class="card-header">Fuel Selection</div>
+
+            <div class="form-group">
+                <label class="form-label" for="fuel-preset">Load Example Fuel:</label>
+                <select id="fuel-preset" class="form-select" onchange="loadPreset()">
+                    <option value="custom">Custom</option>
+                    <option value="pure-methane">Pure Methane</option>
+                    <option value="natural-gas-typical" selected>Natural Gas (Typical)</option>
+                    <option value="natural-gas-high">Natural Gas (High BTU)</option>
+                    <option value="natural-gas-lean">Natural Gas (Lean)</option>
+                    <option value="landfill-gas">Landfill Gas</option>
+                    <option value="digester-gas">Digester Gas</option>
+                    <option value="refinery-gas">Refinery Gas</option>
+                    <option value="coke-oven-gas">Coke Oven Gas</option>
+                    <option value="blast-furnace-gas">Blast Furnace Gas</option>
+                </select>
+            </div>
+
+            <div id="preset-info" class="text-muted"></div>
+        </div>
+
+        <!-- Fuel Composition Form -->
+        <form id="heating-value-form" action="/api/calculate/heating-value" method="POST">
+            <div class="card">
+                <div class="card-header">Fuel Composition (Mass %)</div>
+
+                <div class="grid grid-3">
+                    <!-- Paraffins -->
+                    <div>
+                        <h3>Paraffins</h3>
+                        <div class="form-group">
+                            <label class="form-label" for="ch4">Methane (CH4)</label>
+                            <input type="number" id="ch4" name="ch4" class="form-input"
+                                   min="0" max="100" step="0.1" value="85.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="c2h6">Ethane (C2H6)</label>
+                            <input type="number" id="c2h6" name="c2h6" class="form-input"
+                                   min="0" max="100" step="0.1" value="10.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="c3h8">Propane (C3H8)</label>
+                            <input type="number" id="c3h8" name="c3h8" class="form-input"
+                                   min="0" max="100" step="0.1" value="3.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="c4h10">Butane (C4H10)</label>
+                            <input type="number" id="c4h10" name="c4h10" class="form-input"
+                                   min="0" max="100" step="0.1" value="1.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                    </div>
+
+                    <!-- Light Gases -->
+                    <div>
+                        <h3>Light Gases</h3>
+                        <div class="form-group">
+                            <label class="form-label" for="h2">Hydrogen (H2)</label>
+                            <input type="number" id="h2" name="h2" class="form-input"
+                                   min="0" max="100" step="0.1" value="0.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="co">Carbon Monoxide (CO)</label>
+                            <input type="number" id="co" name="co" class="form-input"
+                                   min="0" max="100" step="0.1" value="0.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="h2s">Hydrogen Sulfide (H2S)</label>
+                            <input type="number" id="h2s" name="h2s" class="form-input"
+                                   min="0" max="100" step="0.1" value="0.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                    </div>
+
+                    <!-- Inerts -->
+                    <div>
+                        <h3>Inerts</h3>
+                        <div class="form-group">
+                            <label class="form-label" for="co2">Carbon Dioxide (CO2)</label>
+                            <input type="number" id="co2" name="co2" class="form-input"
+                                   min="0" max="100" step="0.1" value="1.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="n2">Nitrogen (N2)</label>
+                            <input type="number" id="n2" name="n2" class="form-input"
+                                   min="0" max="100" step="0.1" value="0.0" required
+                                   oninput="validateTotal()">
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Total Validation -->
+                <div id="total-validation" class="status">
+                    <strong>Total:</strong> <span id="total-value">100.0</span>%
+                    <span id="validation-message"></span>
+                </div>
+
+                <div id="inert-warning" style="display: none;" class="status status-warning mt-2">
+                    High inert content. This will reduce heating value.
+                </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <div class="text-center mt-2">
+                <button type="submit" id="calculate-btn" class="btn btn-primary" style="min-width: 250px;">
+                    Calculate Heating Values
+                </button>
+            </div>
+        </form>
+
+        <!-- Results Section (Hidden until calculated) -->
+        <div id="results-section" style="display: none;">
+            <hr>
+            <h2>Results</h2>
+
+            <div class="card">
+                <div class="card-header">Mass Basis</div>
+                <div class="grid grid-3">
+                    <div>
+                        <p class="text-muted mb-0">Higher Heating Value</p>
+                        <h2 id="hhv-mass">--</h2>
+                        <p class="text-muted">BTU/lb</p>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0">Lower Heating Value</p>
+                        <h2 id="lhv-mass">--</h2>
+                        <p class="text-muted">BTU/lb</p>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0">Difference</p>
+                        <h2 id="diff-mass">--</h2>
+                        <p class="text-muted">BTU/lb</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Volume Basis</div>
+                <div class="grid grid-3">
+                    <div>
+                        <p class="text-muted mb-0">HHV (Volume)</p>
+                        <h2 id="hhv-volume">--</h2>
+                        <p class="text-muted">BTU/scf</p>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0">LHV (Volume)</p>
+                        <h2 id="lhv-volume">--</h2>
+                        <p class="text-muted">BTU/scf</p>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0">Difference</p>
+                        <h2 id="diff-volume">--</h2>
+                        <p class="text-muted">BTU/scf</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Excel Comparison (if available) -->
+            <div id="excel-comparison" style="display: none;">
+                <div class="card">
+                    <div class="card-header">Excel VBA Comparison</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>HHV (BTU/lb)</th>
+                                <th>Deviation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Python</td>
+                                <td id="python-hhv">--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td>Excel VBA</td>
+                                <td id="excel-hhv">--</td>
+                                <td id="deviation">--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="comparison-status"></div>
+                </div>
+            </div>
+
+            <!-- Export Options -->
+            <div class="card">
+                <div class="card-header">Export Results</div>
+                <button type="button" class="btn btn-secondary" onclick="exportJSON()">
+                    Export as JSON
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="window.print()">
+                    Print Results
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Sigma Thermal Engineering Calculators</strong> v1.0</p>
+            <p>&copy; 2025 GTS Energy Inc.</p>
+        </div>
+    </footer>
+
+    <script src="../js/heating-value.js"></script>
+</body>
+</html>

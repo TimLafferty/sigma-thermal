@@ -1,0 +1,31 @@
+# Development Dependencies
+-r requirements.txt
+
+# Testing
+pytest-xdist>=3.3.0        # Parallel testing
+pytest-timeout>=2.1.0      # Test timeouts
+pytest-mock>=3.11.0        # Mocking
+
+# Code Quality
+pylint>=2.17.0
+flake8>=6.0.0
+isort>=5.12.0
+
+# Type Checking
+types-openpyxl
+pandas-stubs
+
+# Documentation
+sphinx-autodoc-typehints>=1.24.0
+myst-parser>=2.0.0
+
+# VBA Extraction
+oletools>=0.60.0
+
+# Profiling
+line_profiler>=4.0.0
+memory_profiler>=0.61.0
+
+# Jupyter (for analysis)
+jupyter>=1.0.0
+ipykernel>=6.25.0
